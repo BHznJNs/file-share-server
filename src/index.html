@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Share Server</title>
+    <link rel="preload" href="/asset/script/index.js" as="script">
+    <link rel="preload" href="/asset/style/fileItem.css" as="style">
+    <link rel="stylesheet" href="/asset/style/index.css">
+</head>
+<body>
+    <template id="file-item-template">
+        <link rel="stylesheet" href="/asset/style/fileItem.css">
+        <div class="file-item">
+            <i class="material-icons item-icon">assignment</i>
+            <div class="item-name"></div>
+        </div>
+    </template>
+    <template id="folder-item-template">
+        <link rel="stylesheet" href="/asset/style/fileItem.css">
+        <div class="folder-item">
+            <i class="material-icons item-icon">folder</i>
+            <div class="item-name"></div>
+        </div>
+    </template>
+
+    <header>
+        <button class="material-icons" disabled>arrow_back</button>
+        <button class="material-icons" disabled>arrow_forward</button>
+        <div id="path">/</div>
+    </header>
+    <main>
+        <file-item name="file name"></file-item>
+        <file-item name="file.apk"></file-item>
+        <folder-item name="Folder"></folder-item>
+        <file-item name="file.jpg"></file-item>
+        <file-item name="file.js"></file-item>
+        <file-item name="file.mp3"></file-item>
+        <file-item name="file.mp4"></file-item>
+        <file-item name="file.pdf"></file-item>
+        <file-item name="file.css"></file-item>
+        <file-item name="file name"></file-item>
+        <file-item name="file.apk"></file-item>
+        <folder-item name="Folder"></folder-item>
+        <file-item name="file.jpg"></file-item>
+        <file-item name="file.js"></file-item>
+        <file-item name="file.mp3"></file-item>
+        <file-item name="file.mp4"></file-item>
+        <file-item name="file.pdf"></file-item>
+        <file-item name="file.css"></file-item>
+        <file-item name="file name"></file-item>
+        <file-item name="file.apk"></file-item>
+        <folder-item name="Folder"></folder-item>
+        <file-item name="file.jpg"></file-item>
+        <file-item name="file.js"></file-item>
+        <file-item name="file.mp3"></file-item>
+        <file-item name="file.mp4"></file-item>
+        <file-item name="file.pdf"></file-item>
+        <file-item name="file.css"></file-item>
+    </main>
+    <footer>
+        <button class="material-icons">file_upload</button>
+        <button class="material-icons" id="open-in-new" disabled>open_in_new</button>
+    </footer>
+
+    <script type="module" src="/asset/script/index.js"></script>
+</body>
+</html>

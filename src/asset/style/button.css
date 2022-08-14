@@ -1,0 +1,25 @@
+button {
+    margin: 0 4px;
+    padding: 4px 12px;
+    cursor: pointer;
+    background-color: transparent;
+    border: solid 1px #ECEFF1;
+    border-radius: 4px;
+    outline: none;
+    -webkit-box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12) !important;
+            box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12) !important;
+    transition: color .2s,
+                background-color .2s,
+                opacity .3s;
+}
+button:hover {
+    background-color: #CFD8DC;
+}
+button:active {
+    color: white;
+    background-color: #607D8B
+}
+button:disabled {
+    opacity: .85;
+    pointer-events: none;
+}
