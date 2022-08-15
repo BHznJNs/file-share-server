@@ -1,4 +1,4 @@
-// Selected Item
+// Global selected item array
 globalThis.SELECT = {
     selectedItems: [],
     set(bool, node) {
@@ -11,7 +11,6 @@ globalThis.SELECT = {
         }
 
         const openInNew = document.getElementById("open-in-new")
-        console.log(openInNew)
         openInNew.disabled = !Boolean(this.selectedItems.length)
     },
     clear() {
@@ -22,5 +21,19 @@ globalThis.SELECT = {
                 item.select(false)
             }
         }
+    }
+}
+
+// Global file path
+const pathNode = document.getElementById("path")
+globalThis.PATH = {
+    node: document.getElementById("path"),
+    history: [],
+    get value() {
+        return this.node.innerText
+    },
+    set value(newVal) {
+        this.node.innerText = newVal
+        history.push(newVal)
     }
 }
