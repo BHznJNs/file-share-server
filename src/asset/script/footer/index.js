@@ -38,8 +38,8 @@ deleteButton.addEventListener("click", () => {
             if (i == (length - 1)) {
                 clearMain()
                 renderMain(data.current)
+                globalThis.SELECT.clear()
             }
-            globalThis.SELECT.clear()
         })
     }
 })
