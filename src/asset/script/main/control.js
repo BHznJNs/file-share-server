@@ -1,16 +1,14 @@
-import { FileItem, FolderItem } from "../component/fileItem.js"
-import requestFolder from "./requestFolder.js"
+import { FileItem, FolderItem } from "../../component/fileItem.js"
 
 const mainNode = document.querySelector("main")
-// Cancel the select status
-// of all the selected items.
-mainNode.addEventListener("click", (e) => {
-    if (e.target == mainNode) {
-        globalThis.SELECT.clear()
+
+export function clearMain() {
+    while (mainNode.hasChildNodes()) {
+        const lastChild = mainNode.lastChild
+        mainNode.removeChild(lastChild)
     }
-})
-addEventListener("load", async () => {
-    const items = await requestFolder("/")
+}
+export function renderMain(items) {
     const documentFragment = new DocumentFragment()
 
     for (let item of items) {
@@ -25,4 +23,4 @@ addEventListener("load", async () => {
         }
     }
     mainNode.appendChild(documentFragment)
-})
+}

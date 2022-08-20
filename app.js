@@ -1,6 +1,7 @@
 import Koa from "koa"
 import koaBody from "koa-body"
 
+import "./utils/init.js"
 import config from "./config.js"
 import getLocalIp from "./utils/getLocalIp.js"
 import middlewareInstall from "./router/index.js"
@@ -9,7 +10,7 @@ const app = new Koa()
 app.use(koaBody({
     multipart: true,
     formidable: {
-        uploadDir: "./static",
+        uploadDir: globalThis.base,
         maxFileSize: 400*1024*1024,
         keepExtensions: true,
         // Reset the file name.

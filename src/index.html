@@ -7,33 +7,38 @@
     <link rel="preload" href="/asset/script/index.js" as="script">
     <link rel="preload" href="/asset/style/fileItem.css" as="style">
     <link rel="stylesheet" href="/asset/style/index.css">
+    <link rel="shortcut icon" href="/asset/favicon.svg" type="image/x-icon">
 </head>
 <body>
     <template id="file-item-template">
         <link rel="stylesheet" href="/asset/style/fileItem.css">
         <div class="file-item">
-            <i class="material-icons item-icon">assignment</i>
+            <div class="material-icons item-icon">assignment</div>
             <div class="item-name"></div>
         </div>
     </template>
     <template id="folder-item-template">
         <link rel="stylesheet" href="/asset/style/fileItem.css">
         <div class="folder-item">
-            <i class="material-icons item-icon">folder</i>
+            <div class="material-icons item-icon">folder</div>
             <div class="item-name"></div>
         </div>
     </template>
 
     <header>
-        <button class="material-icons" disabled>arrow_back</button>
-        <button class="material-icons" disabled>arrow_forward</button>
+        <button class="material-icons" id="back" disabled>arrow_back</button>
+        <button class="material-icons" id="next" disabled>arrow_forward</button>
         <div id="path">/</div>
+        <div is="msg-box"></div>
+        <div id="delete-area" class="material-icons">delete_forever</div>
     </header>
     <main>
     </main>
     <footer>
         <button class="material-icons" id="uploader">file_upload</button>
         <input type="file" id="uploader-input" style="display: none;">
+        <button class="material-icons" id="delete-button" disabled>delete_forever</button>
+        <button class="material-icons" id="open-in-browser" disabled>open_in_browser</button>
         <button class="material-icons" id="open-in-new" disabled>open_in_new</button>
     </footer>
 

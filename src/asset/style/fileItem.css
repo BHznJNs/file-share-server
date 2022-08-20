@@ -1,15 +1,15 @@
 @import url(./materialIcons.css);
 
 .file-item, .folder-item {
-    width: 112px;
+    width: 110px;
     height: fit-content;
-    padding: 2px 12px 4px;
     cursor: pointer;
     border: solid 4px transparent;
     border-radius: 8px;
     box-sizing: border-box;
     transition: border-color .2s,
-                background-color .2s .2s;
+                background-color .2s .2s,
+                opacity .2s;
 }
 .file-item.selected {
     background-color: #ECEFF1;
@@ -20,6 +20,12 @@
     border-color: #FFEE58;
 }
 
+.file-item > .item-icon,
+.folder-item > .item-icon {
+    height: 1em;
+    line-height: 1em;
+    text-align: center;
+}
 .file-item > .item-icon {
     color: #455A64;
     font-size: 80px;
@@ -30,14 +36,15 @@
 }
 
 .item-name {
-    width: 100px;
-    margin-top: -12px;
-    margin-left: -10px;
+    display: -webkit-box;
+    overflow: hidden;    
+    -webkit-box-orient: vertical;
+
+    margin: -4px 4px 4px;
     text-align: center;
     font-size: 18px;
     font-family: sans-serif;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
     user-select: none;
 }
@@ -50,4 +57,9 @@
 .folder-item.selected .item-name {
     word-break: break-all;
     white-space: normal;
+    -webkit-line-clamp: 2;
+}
+.file-item.draging,
+.folder-item.draging {
+    opacity: .75;
 }
