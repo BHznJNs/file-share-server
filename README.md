@@ -4,7 +4,7 @@ A lite server used to share files in your local area network based on Koa.js(bac
 
 ## Dependence
 
-[node.js](https://nodejs.org/en/) >= 14.x
+[node.js](https://nodejs.org/en/) >= 14.x & A Modern Browser.
 
 ## Install
 
