@@ -1,6 +1,5 @@
 import "./global.js"
 import "../component/fileItem.js"
-import "../component/msgBox.js"
 import "./main/index.js"
 import "./upload/index.js"
 import "./footer/index.js"

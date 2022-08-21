@@ -1,5 +1,7 @@
 import extname from "../script/extname.js"
 import tapEvent from "../script/tapEvent.js"
+import requestMove from "../script/request/requestMove.js"
+import { clearMain, renderMain } from "../script/main/control.js"
 
 const fileItemTemplate = document.getElementById("file-item-template")
 const folderItemTemplate = document.getElementById("folder-item-template")
@@ -19,7 +21,6 @@ const iconTypes = new Map([
 export class FileItem extends HTMLElement {
     constructor(name) {
         super()
-        this.draggable = true
         const shadow = this.attachShadow({ mode: "open" })
         const clone = fileItemTemplate.content.cloneNode(true)
         
@@ -33,6 +34,8 @@ export class FileItem extends HTMLElement {
         clone.querySelector(".item-icon").innerText = icon
         shadow.appendChild(clone)
 
+        this.draggable = true
+        this.type = "file"
         this.item = shadow.querySelector(".file-item")
 
         if (!("ontouchstart" in document.documentElement)) {
@@ -48,14 +51,10 @@ export class FileItem extends HTMLElement {
             // Drag events
             this.ondragstart = () => {
                 this.item.classList.add("draging")
-                globalThis.DRAG.activate()
+                globalThis.DRAG.activate(this)
             }
             this.ondragend = () => {
                 this.item.classList.remove("draging")
-                globalThis.DRAG.deactivate({
-                    name: this.itemName,
-                    type: this.type,
-                })
             }
         }
 
@@ -84,8 +83,10 @@ export class FileItem extends HTMLElement {
         const name = this.itemName
         window.open(url + "static" + path + name)
     }
-    type = "file"
 }
+
+const folderIcon = "folder"
+const folderOpenIcon = "folder_open"
 export class FolderItem extends HTMLElement {
     constructor(name) {
         super()
@@ -95,10 +96,43 @@ export class FolderItem extends HTMLElement {
         clone.querySelector(".item-name").innerText = this.itemName
         shadow.appendChild(clone)
 
+        this.draggable = true
+        this.type = "folder"
+        this.item = shadow.querySelector(".folder-item")
+        this.icon = shadow.querySelector(".item-icon")
+
         if (!("ontouchstart" in document.documentElement)) {
             // Click Events
             this.onclick = () => this.select()
             this.ondblclick = () => this.open()
+            // Drag Events
+            this.ondragstart = () => {
+                this.item.classList.add("draging")
+                globalThis.DRAG.activate(this)
+            }
+            this.ondragend = () => {
+                this.item.classList.remove("draging")
+                globalThis.DRAG.deactivate()
+            }
+            this.ondragover = (e) => e.preventDefault()
+            this.ondragenter = () => {
+                this.item.classList.add("dropable")
+                this.icon.innerText = folderOpenIcon
+            }
+            this.ondragleave = () => {
+                this.item.classList.remove("dropable")
+                this.icon.innerText = folderIcon
+            }
+            this.ondrop = async () => {
+                this.item.classList.remove("dropable")
+                this.icon.innerText = folderIcon
+                const { itemName } = globalThis.DRAG.deactivate()
+                const data = await requestMove(this.itemName, itemName)
+
+                if (!data) {return}
+                clearMain()
+                renderMain(data.current)
+            }
         }
         // Mobile tap event
         tapEvent(
@@ -109,14 +143,13 @@ export class FolderItem extends HTMLElement {
     }
     select(bool) {
         // If no param, do normal toggle.
-        const item = this.shadowRoot.querySelector(".folder-item")
+        const item = this.item
         const isSelected = item.classList.toggle("selected", bool)
         globalThis.SELECT.set(isSelected, this)
     }
-    async open() {
+    open() {
         globalThis.PATH.push(this.itemName + "/")
     }
-    type = "folder"
 }
 
 customElements.define("file-item", FileItem)

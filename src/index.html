@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Share Server</title>
-    <link rel="preload" href="/asset/script/index.js" as="script">
+    <link rel="preload" href="/asset/script/index.js" as="script" crossOrigin="anonymous">
     <link rel="preload" href="/asset/style/fileItem.css" as="style">
     <link rel="stylesheet" href="/asset/style/index.css">
     <link rel="shortcut icon" href="/asset/favicon.svg" type="image/x-icon">
@@ -29,17 +29,21 @@
         <button class="material-icons" id="back" disabled>arrow_back</button>
         <button class="material-icons" id="next" disabled>arrow_forward</button>
         <div id="path">/</div>
-        <div is="msg-box"></div>
         <div id="delete-area" class="material-icons">delete_forever</div>
     </header>
     <main>
     </main>
+
     <footer>
+        <input id="create-new-folder-input" type="text" placeholder="Input folder name here">
+
         <button class="material-icons" id="uploader">file_upload</button>
-        <input type="file" id="uploader-input" style="display: none;">
-        <button class="material-icons" id="delete-button" disabled>delete_forever</button>
-        <button class="material-icons" id="open-in-browser" disabled>open_in_browser</button>
-        <button class="material-icons" id="open-in-new" disabled>open_in_new</button>
+        <input type="file" style="display: none;" id="uploader-input">
+        <button class="material-icons" id="create-new-folder" data-display-group="0">create_new_folder</button>
+        <button class="material-icons" id="delete-button" data-display-group="0" disabled>delete_forever</button>
+        <button class="material-icons disabled" id="open-in-browser" data-display-group="1" disabled>open_in_browser</button>
+        <button class="material-icons disabled" id="open-in-new" data-display-group="1" disabled>open_in_new</button>
+        <button class="material-icons" id="loop">loop</button>
     </footer>
 
     <script type="module" src="/asset/script/index.js"></script>

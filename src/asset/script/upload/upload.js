@@ -23,6 +23,6 @@ export default function(file) {
     })
     .catch(err => {
         console.warn(err)
-        globalThis.MSG.open("Upload request error!")
+        alert("Upload request error!")
     })
 }

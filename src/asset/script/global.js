@@ -1,6 +1,5 @@
 import requestFolder from "./request/requestFolder.js"
 import { clearMain, renderMain } from "./main/control.js"
-import requestDelete from "./request/requestDelete.js"
 
 // Global selected item array
 const openInNew = document.getElementById("open-in-new")
@@ -53,13 +52,14 @@ globalThis.PATH = {
     async refresh() {
         const pathArr = this.history.slice(0, this.current)
         const path = pathArr.join("")
-        const {current: folderContent} = await requestFolder(path)
-        if (!folderContent) {return}
+        const data = await requestFolder(path)
+        if (!data) {return}
 
+        const current = data.current
         globalThis.SELECT.clear()
         this.value = path
         clearMain()
-        renderMain(folderContent)
+        renderMain(current)
     },
 
     push(path) {
@@ -99,28 +99,17 @@ globalThis.PATH = {
 
 // Drag event
 globalThis.DRAG = {
-    node: document.getElementById("delete-area"),
-    isDroped: false,
+    deleteArea: document.getElementById("delete-area"),
+    dragingEl: null,
 
     activate(el) {
-        this.node.classList.add("active")
-        this.element = el
+        this.deleteArea.classList.add("active")
+        this.dragingEl = el
     },
-    droped() {
-        this.isDroped = true
-    },
-    async deactivate(obj) {
-        this.node.classList.remove("active")
-        if (this.isDroped) {
-            const {name, type} = obj
-            const {current: data} = await requestDelete(name, type)
-            if (!data) {return}
-            clearMain()
-            renderMain(data)
-        }
-        this.isDroped = false
+    deactivate() {
+        this.deleteArea.classList.remove("active")
+        const { itemName, type } = this.dragingEl
+        this.dragingEl = null
+        return { itemName, type }
     }
 }
-
-// Message Event
-globalThis.MSG = document.querySelector("div[is='msg-box']")

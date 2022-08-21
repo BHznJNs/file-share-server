@@ -1,7 +1,7 @@
 import readDir from "../../utils/readDir.js"
 
 export default function(ctx) {
-    const path = ctx.path
+    const path = decodeURI(ctx.path)
     const folderPath = path.replace("/folder", globalThis.BASE)
     const folderContent = readDir(folderPath)
     let returnCode = null

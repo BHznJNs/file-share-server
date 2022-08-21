@@ -3,14 +3,12 @@ header {
     display: flex;
     padding: 8px 24px;
     background-color: white;
-    z-index: 10;
     -webkit-box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12) !important;
             box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12) !important;
 }
 
 #path {
-    position: relative;
-    flex: 1; z-index: 5;
+    flex: 1;
     height: 32px;
     margin: 0 4px 0 16px;
     padding: 4px 8px;
@@ -28,9 +26,6 @@ header {
     color: #333;
     border-color: #666;
 }
-#path:hover ~ div[is="msg-box"] {
-    border-color: #666;
-}
 
 /* Delete Area */
 #delete-area {
@@ -43,7 +38,6 @@ header {
     line-height: 56px;
     background-color: #FF5722;
     opacity: 0;
-    z-index: 11;
     pointer-events: none;
     transition: opacity .2s;
 }
@@ -53,25 +47,4 @@ header {
 }
 #delete-area.dropable {
     opacity: .75;
-}
-
-div[is="msg-box"] {
-    position: absolute;
-    bottom: 8px;
-    left: 0; right: 0;
-    z-index: 1;
-    width: fit-content;
-    height: 30px;
-    border: solid 1px #999;
-    border-radius: 0 0 8px 8px;
-    margin: 0 auto;
-    padding: 4px 12px;
-    color: #333;
-    background-color: #ECEFF1;
-    cursor: pointer;
-    transition: transform .2s,
-                border-color .2s;
-}
-div[is="msg-box"].active {
-    transform: translateY(100%);
 }

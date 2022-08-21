@@ -7,12 +7,12 @@ export default function(path, errMsg) {
                 resolve(data)
             } else {
                 resolve(null)
-                globalThis.MSG.open("Server side error!")
+                alert("Server side error!")
             }
         })
         .catch(err => {
             console.warn(err)
-            globalThis.MSG.open(errMsg)
+            alert(errMsg)
             resolve(null)
         })
     })

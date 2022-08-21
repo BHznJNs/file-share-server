@@ -10,7 +10,8 @@ mainNode.addEventListener("click", (e) => {
     }
 })
 addEventListener("load", async () => {
-    const items = await requestFolder("/")
+    const timeStamp = new Date().getTime()
+    const items = await requestFolder("/?timestamp=" + timeStamp)
     if (!items) {return}
     renderMain(items.current)
 })

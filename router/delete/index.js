@@ -1,17 +1,18 @@
-import { rmSync, rmdirSync } from "node:fs"
+import { rmSync } from "node:fs"
 import readDir from "../../utils/readDir.js"
 
 function del(path, type) {
-    const func = (type=="file") ?
-                rmSync : rmdirSync
     const fullPath = globalThis.BASE + path
-
-    try {
-        func(fullPath)
-        return true
-    } catch (err) {
-        console.warn(err)
-        return false
+    if (type == "file" || type == "folder") {
+        try {
+            rmSync(fullPath, { recursive: true })
+            return true
+        } catch(err) {
+            console.warn(err)
+            return false
+        }
+    } else {
+        console.warn("Got a unknown type!")
     }
 }
 
