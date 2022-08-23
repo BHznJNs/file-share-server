@@ -97,7 +97,7 @@ globalThis.PATH = {
     }
 }
 
-// Drag event
+// Global drag event
 globalThis.DRAG = {
     deleteArea: document.getElementById("delete-area"),
     dragingEl: null,
@@ -108,8 +108,28 @@ globalThis.DRAG = {
     },
     deactivate() {
         this.deleteArea.classList.remove("active")
-        const { itemName, type } = this.dragingEl
-        this.dragingEl = null
-        return { itemName, type }
+        
+        if (this.dragingEl) {
+            const { itemName, type } = this.dragingEl
+            this.dragingEl = null
+            return { itemName, type }
+        } else {
+            return null
+        }
     }
 }
+
+// Global vnode
+// globalThis.VNODE = {
+//     __value: [],
+//     get value() {
+//         return this.__value
+//     },
+//     set value(newVal) {
+//         this.diff(this.value, newVal)
+//     },
+
+//     diff(oldVal, newVal) {
+//         // 
+//     }
+// }

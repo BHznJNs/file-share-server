@@ -116,17 +116,24 @@ export class FolderItem extends HTMLElement {
             }
             this.ondragover = (e) => e.preventDefault()
             this.ondragenter = () => {
-                this.item.classList.add("dropable")
-                this.icon.innerText = folderOpenIcon
+                if (globalThis.DRAG.dragingEl != this) {
+                    this.item.classList.add("dropable")
+                    this.icon.innerText = folderOpenIcon
+                }
             }
             this.ondragleave = () => {
                 this.item.classList.remove("dropable")
                 this.icon.innerText = folderIcon
             }
             this.ondrop = async () => {
+                const targetEl = globalThis.DRAG.dragingEl
+                const { itemName } = globalThis.DRAG.deactivate()
+                if (targetEl == this) {
+                    return
+                }
+
                 this.item.classList.remove("dropable")
                 this.icon.innerText = folderIcon
-                const { itemName } = globalThis.DRAG.deactivate()
                 const data = await requestMove(this.itemName, itemName)
 
                 if (!data) {return}

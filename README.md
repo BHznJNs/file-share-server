@@ -16,7 +16,7 @@ cd file-share-server
 npm i
 ```
 
-## How to start
+## Launch
 
 ```sh
 npm start
