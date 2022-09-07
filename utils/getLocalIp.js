@@ -6,7 +6,12 @@ import os from "os"
  */
 function ipGetter() {
 	const ifaces = os.networkInterfaces()
-	const address = ifaces.wlan0[0].address
-	return address
+	// const address = ifaces.wlan0[0].address
+	for (let i of ifaces.WLAN) {
+		if (i.family == "IPv4") {
+			return i.address
+		} 
+	}
 }
+
 export default ipGetter
